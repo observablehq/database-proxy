@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "JSONStream": "^1.3.5",
+    "esm": "^3.2.25",
+    "micro": "^9.3.4",
+    "pg": "^7.11.0",
+    "pg-query-stream": "^2.0.0",
+    "serialize-error": "^4.1.0"
+  },
+  "name": "data-local",
+  "description": "@observablehq/data-local",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node -r esm node_modules/.bin/micro -l tcp://0.0.0.0:${PORT-2899}",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
