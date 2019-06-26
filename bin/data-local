@@ -26,7 +26,7 @@ switch (type) {
 
 const server = https
   .createServer({ key, cert }, (req, res) => run(req, res, index))
-  .listen(process.env.PORT || 2899, "127.0.0.1", () => {
+  .listen(2899, "127.0.0.1", () => {
     const { address, port } = server.address();
     console.log(`${type} proxy running at https://${address}:${port}`);
   });

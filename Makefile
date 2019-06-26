@@ -1,11 +1,11 @@
 .PHONY: install clean
 
-# install: ssl/test.crt
-# 	@echo "Installing self-signed certificate into your System keychain."
-# 	sudo security add-trusted-cert \
-# 		-d -r trustRoot \
-# 		-k /Library/Keychains/System.keychain \
-# 		ssl/test.crt
+install: ssl/localhost.crt
+	@echo "Installing self-signed certificate into your System keychain."
+	sudo security add-trusted-cert \
+		-d -r trustRoot \
+		-k /Library/Keychains/System.keychain \
+		ssl/localhost.crt
 
 ssl/localhost.crt: ssl/localhost.csr ssl/localhost.key ssl/openssl.conf
 	openssl x509 \
