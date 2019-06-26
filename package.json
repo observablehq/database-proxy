@@ -15,8 +15,6 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "dev": "nodemon -w '*/*.js' -w bin/data-local -x yarn start",
-    "start": "bin/data-local",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -3,8 +3,8 @@
 const https = require("https");
 const { parse: parseURL } = require("url");
 const { run } = require("micro");
-const { key, cert } = require("./ssl");
 const serializeError = require("serialize-error");
+const { key, cert } = require("../ssl");
 
 if (process.argv.length !== 4) {
   console.error("Usage: data-local postgres://localhost/db origin");
@@ -17,10 +17,10 @@ const type = parseURL(url).protocol.replace(":", "");
 let db;
 switch (type) {
   case "mysql":
-    db = require("./mysql")(url);
+    db = require("../lib/mysql")(url);
     break;
   case "postgres":
-    db = require("./postgres")(url);
+    db = require("../lib/postgres")(url);
     break;
 }
 
