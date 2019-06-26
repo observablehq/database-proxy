@@ -37,7 +37,9 @@ async function index(req, res) {
   res.setHeader("Access-Control-Max-Age", "86400");
   if (origin === expectedOrigin)
     res.setHeader("Access-Control-Allow-Origin", origin);
+
   if (req.method === "OPTIONS") return "";
+  if (req.method === "GET") return { message: "Hello!" };
 
   try {
     return await db(req, res);
