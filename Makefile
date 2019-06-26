@@ -7,7 +7,7 @@
 # 		-k /Library/Keychains/System.keychain \
 # 		ssl/test.crt
 
-ssl/localhost.crt: ssl/localhost.csr ssl/localhost.key openssl.conf
+ssl/localhost.crt: ssl/localhost.csr ssl/localhost.key ssl/openssl.conf
 	openssl x509 \
 		-req \
 		-days 3650 \
@@ -15,14 +15,14 @@ ssl/localhost.crt: ssl/localhost.csr ssl/localhost.key openssl.conf
 		-signkey ssl/localhost.key \
 		-out ssl/localhost.crt \
 		-extensions v3_req \
-		-extfile openssl.conf
+		-extfile ssl/openssl.conf
 
-ssl/localhost.csr: ssl/localhost.key
+ssl/localhost.csr: ssl/localhost.key ssl/openssl.conf
 	openssl req \
 		-new \
 		-out ssl/localhost.csr \
 		-key ssl/localhost.key \
-		-config openssl.conf \
+		-config ssl/openssl.conf \
 		-subj "/C=US/ST=California/L=San Francisco/OU=Observable, Inc./CN=127.0.0.1"
 
 ssl/localhost.key:
@@ -30,4 +30,4 @@ ssl/localhost.key:
 		-out ssl/localhost.key 2048
 
 clean:
-	rm ssl/*
+	rm ssl/localhost.*
