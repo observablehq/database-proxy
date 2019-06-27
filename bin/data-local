@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-const {secret, origin, url} = require(".observablehq");
+require = require("esm")(module);
 
-const server = require("esm")(module)("../lib/server");
-server({secret, origin, url});
+const getConfig = require("../lib/config").default;
+const server = require("../lib/server").default;
+
+getConfig().then(server);

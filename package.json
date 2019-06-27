@@ -4,6 +4,7 @@
     "esm": "^3.2.25",
     "micro": "^9.3.4",
     "mysql": "^2.17.1",
+    "open": "^6.3.0",
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.0",
     "serialize-error": "^4.1.0"
@@ -16,6 +17,7 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
+    "dev": "nodemon bin/data-local",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
