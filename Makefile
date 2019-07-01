@@ -23,7 +23,7 @@ ssl/localhost.csr: ssl/localhost.key ssl/openssl.conf
 		-out ssl/localhost.csr \
 		-key ssl/localhost.key \
 		-config ssl/openssl.conf \
-		-subj "/C=US/ST=California/L=San Francisco/OU=Observable, Inc./CN=127.0.0.1"
+		-subj "/C=US/ST=California/L=San Francisco/OU=Observable, Inc./CN=localhost"
 
 ssl/localhost.key:
 	openssl genrsa \
