@@ -17,7 +17,7 @@
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "dev": "nodemon bin/observable-database-proxy",
+    "dev": "NODE_ENV=development nodemon bin/observable-database-proxy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
