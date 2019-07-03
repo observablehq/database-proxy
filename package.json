@@ -9,15 +9,15 @@
     "pg-query-stream": "^2.0.0",
     "serialize-error": "^4.1.0"
   },
-  "name": "data-local",
-  "description": "@observablehq/data-local",
+  "name": "database-proxy",
+  "description": "@observablehq/database-proxy",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "dev": "nodemon bin/data-local",
+    "dev": "nodemon bin/observable-database-proxy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

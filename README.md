@@ -1,19 +1,13 @@
-# @observablehq/data-local
+# @observablehq/database-proxy
 
 ## Running
 
-Usage: data-local DATABASE_URL ORIGIN
+Usage: observable-database-proxy DATABASE_URL ORIGIN
 
 Run a proxy for the database found at DATABASE_URL, allowing only the remote
 origin ORIGIN.
 
-> $ data-local postgres://localhost https://worker.test:5000
-
-## SSL Certificates
-
-The proxy uses a self-signed certificate. You can install it manually for
-your system using `make install` or on a per-browser basis open
-`https://127.0.0.1:2899` and mark it as trusted.
+> $ observable-database-proxy postgres://localhost https://worker.test:5000
 
 ## Using from notebooks
 
