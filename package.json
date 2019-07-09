@@ -7,7 +7,8 @@
     "open": "^6.3.0",
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.0",
-    "serialize-error": "^4.1.0"
+    "serialize-error": "^4.1.0",
+    "yargs": "^13.2.4"
   },
   "name": "database-proxy",
   "description": "@observablehq/database-proxy",
