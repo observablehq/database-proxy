@@ -9,6 +9,10 @@ origin ORIGIN.
 
 > $ observable-database-proxy postgres://localhost https://worker.test:5000
 
+## SSL Certificates
+
+
+
 ## Using from notebooks
 
 After the proxy is running, call `DatabaseClient()` without a name to get a
