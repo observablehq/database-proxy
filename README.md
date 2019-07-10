@@ -2,16 +2,13 @@
 
 ## Running
 
-Usage: observable-database-proxy DATABASE_URL ORIGIN
+Usage: observable-database-proxy
 
-Run a proxy for the database found at DATABASE_URL, allowing only the remote
-origin ORIGIN.
+Run a proxy.
 
-> $ observable-database-proxy postgres://localhost https://worker.test:5000
+> \$ observable-database-proxy
 
 ## SSL Certificates
-
-
 
 ## Using from notebooks
 
