@@ -19,16 +19,25 @@ Or install it globally with `npm` or `yarn`:
 
 ## Running the database proxy
 
-Usage for HTTP on localhost: `observable-database-proxy <name>`
-For HTTPS (on localhost or elsewhere): `observable-database-proxy <name> --sslcert <path-to-ssl.crt> --sslkey <path-to-ssl.key>`
+Usage: `observable-database-proxy <command> <name> [options]`
 
-The first time running the database proxy for a given connection name, a window will be opened to ObservableHQ.com to configure the connection and set the shared secret. Subsequent starts of the database proxy do not require re-configuration.
+Commands:
 
-To reset the configuration for a given database proxy, use: observable-database-proxy <name> --reset
+- `start <name> [ssl options]` Start a database proxy server
+- `add <name>` Add a new database proxy configuration
+- `remove <name>` Remove an existing database proxy configuration
+- `reset <name>` Reset the shared secret for an existing database proxy configuration
+- `list` List all configured database proxies
+
+When adding a database proxy configuration, a window will be opened to ObservableHQ.com to configure the connection and set the shared secret. Subsequent starts of the database proxy do not require re-configuration.
+
+Examples:
 
 ```
-  $ observable-database-proxy localdb
-  $ observable-database-proxy localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
+  $ observable-database-proxy start localdb
+
+  $ observable-database-proxy add localssl
+  $ observable-database-proxy start localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
 ```
 
 ## SSL Certificates
