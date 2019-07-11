@@ -1,6 +1,21 @@
-# @observablehq/database-proxy
+# @observablehq/observable-database-proxy
 
 The database proxy is a simple webserver that accepts secure requests from your Observable notebooks, and proxies queries to a PostgreSQL or MySQL database — one that is not necessarily exposed to the web. You can use the database proxy to securely connect to databases on your local computer, on an intranet or within a VPN.
+
+## Installation
+
+You can use `npx` to try out the database proxy as a one-off:
+
+```
+  npx @observablehq/observable-database-proxy <name>
+```
+
+Or install it globally with `npm` or `yarn`:
+
+```
+  npm install -g @observablehq/observable-database-proxy
+  yarn global add @observablehq/observable-database-proxy
+```
 
 ## Running the database proxy
 
@@ -11,8 +26,10 @@ The first time running the database proxy for a given connection name, a window 
 
 To reset the configuration for a given database proxy, use: observable-database-proxy <name> --reset
 
-> \$ observable-database-proxy localdb
-> \$ observable-database-proxy localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
+```
+  $ observable-database-proxy localdb
+  $ observable-database-proxy localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
+```
 
 ## SSL Certificates
 

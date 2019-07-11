@@ -3,7 +3,12 @@
 require = require("esm")(module);
 
 require("yargs")
-  .usage(`Usage: observable-database-proxy <name> [options]`)
+  .usage(`$0 <name> [options]`, "Start database connector", yargs => {
+    yargs.positional("name", {
+      describe: "Database connector name",
+      type: "string"
+    });
+  })
   .describe(`reset`, `Reset an existing database proxy configuration`)
   .describe(
     `sslcert`,
@@ -14,11 +19,11 @@ require("yargs")
     `Set the SSL private key location for an HTTPS database proxy`
   )
   .example(
-    `observable-database-proxy localdb`,
+    `$0 localdb`,
     `Configure or run an HTTP database proxy named "localdb"`
   )
   .example(
-    `observable-database-proxy localssl --sslkey ../ssl/localhost.key --sslcert ../ssl/localhost.crt`,
+    `$0 localssl --sslkey ../ssl/localhost.key --sslcert ../ssl/localhost.crt`,
     `Configure or run an HTTPS database proxy named "localssl"`
   );
 
