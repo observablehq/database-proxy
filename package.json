@@ -10,8 +10,8 @@
     "serialize-error": "^4.1.0",
     "yargs": "^13.2.4"
   },
-  "name": "database-proxy",
-  "description": "@observablehq/database-proxy",
+  "name": "observable-database-proxy",
+  "description": "A local proxy to connect private Observable notebooks to private databases",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {

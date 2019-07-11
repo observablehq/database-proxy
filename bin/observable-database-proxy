@@ -2,7 +2,7 @@
 
 require = require("esm")(module);
 
-require("yargs")
+const argv = require("yargs")
   .usage(`$0 <name> [options]`, "Start database connector", yargs => {
     yargs.positional("name", {
       describe: "Database connector name",
@@ -25,9 +25,9 @@ require("yargs")
   .example(
     `$0 localssl --sslkey ../ssl/localhost.key --sslcert ../ssl/localhost.crt`,
     `Configure or run an HTTPS database proxy named "localssl"`
-  );
+  ).argv;
 
-const getConfig = require("../lib/config").default;
-const server = require("../lib/server").default;
+const getConfig = require("../lib/config").default(argv);
+const server = require("../lib/server").default(argv);
 
 getConfig().then(server);
