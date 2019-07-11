@@ -1,15 +1,30 @@
 #!/usr/bin/env node
 
 require = require("esm")(module);
+const exit = require("../lib/errors").exit;
+
+const name = yargs =>
+  yargs.positional("name", {
+    describe: "Database connector name",
+    type: "string"
+  });
 
 const argv = require("yargs")
-  .usage(`$0 <name> [options]`, "Start database connector", yargs => {
-    yargs.positional("name", {
-      describe: "Database connector name",
-      type: "string"
-    });
-  })
-  .describe(`reset`, `Reset an existing database proxy configuration`)
+  .usage(`Usage: $0 <command> <name> [options]`)
+  .command(`start <name> [options]`, `Start a database proxy server`, name)
+  .command(`add <name>`, `Add a new database proxy configuration`, name)
+  .command(
+    `remove <name>`,
+    `Remove an existing database proxy configuration`,
+    name
+  )
+  .command(
+    `reset <name>`,
+    `Reset the shared secret for an existing database proxy configuration`,
+    name
+  )
+  .command(`list`, `List all configured database proxies`)
+  .demandCommand(1, `A command is required`)
   .describe(
     `sslcert`,
     `Set the SSL certificate location for an HTTPS database proxy`
@@ -18,16 +33,33 @@ const argv = require("yargs")
     `sslkey`,
     `Set the SSL private key location for an HTTPS database proxy`
   )
+  .example(`$0 start localdb`, `Run an HTTP database proxy named "localdb"`)
   .example(
-    `$0 localdb`,
-    `Configure or run an HTTP database proxy named "localdb"`
+    `$0 start localssl --sslkey ../ssl/localhost.key --sslcert ../ssl/localhost.crt`,
+    `Run an HTTPS database proxy named "localssl"`
   )
-  .example(
-    `$0 localssl --sslkey ../ssl/localhost.key --sslcert ../ssl/localhost.crt`,
-    `Configure or run an HTTPS database proxy named "localssl"`
-  ).argv;
+  .example(`$0 add localdb`, `Configure a new database proxy named "localdb"`)
+  .argv;
 
-const getConfig = require("../lib/config").default(argv);
-const server = require("../lib/server").default(argv);
+const {start, add, remove, reset, list} = require("../lib/commands");
+const [command] = argv._;
 
-getConfig().then(server);
+switch (command) {
+  case "start":
+    start(argv);
+    break;
+  case "add":
+    add(argv);
+    break;
+  case "remove":
+    remove(argv);
+    break;
+  case "reset":
+    reset(argv);
+    break;
+  case "list":
+    list(argv);
+    break;
+  default:
+    exit("Unknown command");
+}
