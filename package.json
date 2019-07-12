@@ -23,6 +23,6 @@
     "dev": "NODE_ENV=development nodemon bin/observable-database-proxy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Observable",
   "license": "ISC"
 }
