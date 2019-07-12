@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-require = require("esm")(module);
-
-const getConfig = require("../lib/config").default;
-const server = require("../lib/server").default;
-
-getConfig().then(server);

@@ -1,22 +1,55 @@
-# @observablehq/data-local
+# @observablehq/observable-database-proxy
 
-## Running
+The database proxy is a simple webserver that accepts secure requests from your Observable notebooks, and proxies queries to a PostgreSQL or MySQL database — one that is not necessarily exposed to the web. You can use the database proxy to securely connect to databases on your local computer, on an intranet or within a VPN.
 
-Usage: data-local DATABASE_URL ORIGIN
+## Installation
 
-Run a proxy for the database found at DATABASE_URL, allowing only the remote
-origin ORIGIN.
+You can use `npx` to try out the database proxy as a one-off:
 
-> $ data-local postgres://localhost https://worker.test:5000
+```
+  npx @observablehq/observable-database-proxy <name>
+```
+
+Or install it globally with `npm` or `yarn`:
+
+```
+  npm install -g @observablehq/observable-database-proxy
+  yarn global add @observablehq/observable-database-proxy
+```
+
+## Running the database proxy
+
+Usage: `observable-database-proxy <command> <name> [options]`
+
+Commands:
+
+- `start <name> [ssl options]` Start a database proxy server
+- `add <name>` Add a new database proxy configuration
+- `remove <name>` Remove an existing database proxy configuration
+- `reset <name>` Reset the shared secret for an existing database proxy configuration
+- `list` List all configured database proxies
+
+When adding a database proxy configuration, a window will be opened to ObservableHQ.com to configure the connection and set the shared secret. Subsequent starts of the database proxy do not require re-configuration.
+
+Examples:
+
+```
+  $ observable-database-proxy start localdb
+
+  $ observable-database-proxy add localssl
+  $ observable-database-proxy start localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
+```
+
+## Configuration storage
+
+All proxy configuration is stored in `~/.observablehq`. You can delete the file to remove all of your database proxy configuration at once.
 
 ## SSL Certificates
 
-The proxy uses a self-signed certificate. You can install it manually for
-your system using `make install` or on a per-browser basis open
-`https://127.0.0.1:2899` and mark it as trusted.
+If you’re using Chrome or Edge, and running the database proxy on your local computer (at 127.0.0.1), you can connect to it directly with HTTP — there’s no need to set up a self-signed SSL certificate for the proxy.
+
+If you’re using Firefox or Safari, or if you wish to run the database proxy on a different computer on your intranet, you can create a self-signed SSL certificate and configure the database proxy to use it in order to proxy over HTTPS. Be sure to “Require SSL/TLS” in the Observable configuration, and specify the `--sslcert` and `--sslkey` options when running the database proxy.
 
 ## Using from notebooks
 
-After the proxy is running, call `DatabaseClient()` without a name to get a
-client pointed at your local proxy. When querying, data never leaves your
-local computer and database credentials are never sent to Observable.
+After the proxy is running, in one of your private notebooks, use `DatabaseClient("name")` to create a database client pointed at your local proxy. When querying, your data and database credentials never leave your local computer.

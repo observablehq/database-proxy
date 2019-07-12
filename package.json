@@ -7,17 +7,18 @@
     "open": "^6.3.0",
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.0",
-    "serialize-error": "^4.1.0"
+    "serialize-error": "^4.1.0",
+    "yargs": "^13.2.4"
   },
-  "name": "data-local",
-  "description": "@observablehq/data-local",
+  "name": "observable-database-proxy",
+  "description": "A local proxy to connect private Observable notebooks to private databases",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
   "scripts": {
-    "dev": "nodemon bin/data-local",
+    "dev": "NODE_ENV=development nodemon bin/observable-database-proxy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
