@@ -23,7 +23,7 @@ Commands:
 - `reset <name>` Reset the shared secret for an existing database proxy configuration
 - `list` List all configured database proxies
 
-When adding a database proxy configuration, a window will be opened to ObservableHQ.com to configure the connection and set the shared secret. Subsequent starts of the database proxy do not require re-configuration.
+When adding a database proxy configuration, a window will be opened to ObservableHQ.com to configure the connection in your Database Settings and set the shared secret. Subsequent starts of the database proxy do not require re-configuration.
 
 Examples:
 
