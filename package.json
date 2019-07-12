@@ -1,6 +1,6 @@
 {
   "bin": {
-    "observable-database-proxy": ".bin/observable-database-proxy"
+    "observable-database-proxy": "./bin/observable-database-proxy"
   },
   "dependencies": {
     "JSONStream": "^1.3.5",
@@ -15,7 +15,7 @@
   },
   "name": "@observablehq/database-proxy",
   "description": "A local proxy to connect private Observable notebooks to private databases",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
