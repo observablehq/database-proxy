@@ -40,6 +40,10 @@ Examples:
   $ observable-database-proxy start localssl --sslcert ~/.ssl/localhost.crt --sslkey ~/.ssl/localhost.key
 ```
 
+## Configuration storage
+
+All proxy configuration is stored in `~/.observablehq`. You can delete the file to remove all of your database proxy configuration at once.
+
 ## SSL Certificates
 
 If you’re using Chrome or Edge, and running the database proxy on your local computer (at 127.0.0.1), you can connect to it directly with HTTP — there’s no need to set up a self-signed SSL certificate for the proxy.
