@@ -1,4 +1,7 @@
 {
+  "name": "@observablehq/database-proxy",
+  "description": "A local proxy to connect private Observable notebooks to private databases",
+  "version": "1.0.1",
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy"
   },
@@ -11,11 +14,9 @@
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.0",
     "serialize-error": "^4.1.0",
+    "snowflake-sdk": "^1.5.0",
     "yargs": "^13.2.4"
   },
-  "name": "@observablehq/database-proxy",
-  "description": "A local proxy to connect private Observable notebooks to private databases",
-  "version": "1.0.1",
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
@@ -24,5 +25,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Observable",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/observablehq/database-proxy.git"
+  }
 }
