@@ -46,4 +46,4 @@ If you’re using Firefox or Safari, or if you wish to run the database proxy on
 
 ## Using from notebooks
 
-After the proxy is running, in one of your private notebooks, use `DatabaseClient("name")` to create a database client pointed at your local proxy. When querying, your data and database credentials never leave your local computer.
+After the proxy is running, in one of your private notebooks, use `DatabaseClient("name")` to create a database client pointed at your local proxy. When querying, your data and database credentials never leave your local computer. Please check [this notebook for more information on how to use it from Observable](https://observablehq.com/@observablehq/self-hosted-database-proxies)
