@@ -11,8 +11,8 @@
     "micro": "^9.3.4",
     "mysql": "^2.17.1",
     "open": "^6.3.0",
-    "pg": "^7.11.0",
-    "pg-query-stream": "^2.0.0",
+    "pg": "^8.7.1",
+    "pg-query-stream": "^4.2.1",
     "serialize-error": "^4.1.0",
     "snowflake-sdk": "^1.5.0",
     "yargs": "^13.2.4"
