@@ -1,7 +1,7 @@
 {
   "name": "@observablehq/database-proxy",
   "description": "A local proxy to connect private Observable notebooks to private databases",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy"
   },
