@@ -2,6 +2,15 @@
   "name": "@observablehq/database-proxy",
   "description": "A local proxy to connect private Observable notebooks to private databases",
   "version": "2.0.0",
+  "type": "module",
+  "engines" : {
+    "node" : ">=14.19.0"
+  },
+  "exports":{
+    "./postgres.js":  "./lib/postgres.js",
+    "./mysql.js":  "./lib/mysql.js",
+    "./snowflake.js": "./lib/snowflake.js"
+  },
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy"
   },
