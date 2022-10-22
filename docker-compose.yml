@@ -1,0 +1,36 @@
+version: "3.7"
+
+# Need to WAIT for mssql to be ready THEN run sqlcmd AND THEN running tests.
+services:
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+      - MSSQL_DATABASE=test
+      - MSSQL_SLEEP=7
+    volumes:
+      - ./data/test_mssql.bak:/var/opt/mssql/backup/test.bak
+    ports:
+      - "1433:1433"
+    networks:
+      - db_net
+
+  sqlcmd:
+    image: mcr.microsoft.com/mssql-tools:latest
+    stdin_open: true
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - MSSQL_DATABASE=test
+      - MSSQL_BACKUP="/var/opt/mssql/backup/test.bak"
+    networks:
+      - db_net
+    volumes:
+      - ./data/init_mssql.sql:/opt/mssql_scripts/init.sql
+    depends_on:
+      - mssql
+    command: /bin/bash -c '/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P $$MSSQL_SA_PASSWORD -d master -i /opt/mssql_scripts/init.sql'
+
+networks:
+  db_net:
+    name: db_net
