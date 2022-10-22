@@ -1,0 +1,38 @@
+version: "3.7"
+
+# Will need to add the container run test
+# Need to wait for mssql to be ready before running sqlcmd
+# Wait before sql-cmd succeed before we run tests.
+
+services:
+  sqlcmd:
+    image: mcr.microsoft.com/mssql-tools:latest
+    stdin_open: true
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - MSSQL_DATABASE=test
+      - MSSQL_BACKUP="/var/opt/mssql/backup/test.bak"
+    networks:
+      - db_net
+    volumes:
+      - ./init.sql:/opt/mssql_scripts/init.sql
+    command: /bin/bash -c '/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P $$MSSQL_SA_PASSWORD -d master -i /opt/mssql_scripts/init.sql'
+
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+      - MSSQL_DATABASE=test
+      - MSSQL_SLEEP=7
+    volumes:
+      - ./test.bak:/var/opt/mssql/backup/test.bak
+      - ./init.sql:/opt/mssql_scripts/init.sql
+    ports:
+      - "1433:1433"
+    networks:
+      - db_net
+
+networks:
+  db_net:
+    name: db_net
