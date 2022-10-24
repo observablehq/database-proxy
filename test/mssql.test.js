@@ -7,6 +7,7 @@ describe("mssql", () => {
       done();
     });
   });
+
   describe("query", () => {
     it("should test", async (done) => {
       expect(1).equal(1);
