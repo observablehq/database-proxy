@@ -26,7 +26,6 @@
     "pg-query-stream": "^4.2.1",
     "serialize-error": "^4.1.0",
     "snowflake-sdk": "^1.5.0",
-    "wait-on": "^6.0.1",
     "yargs": "^13.2.4"
   },
   "devDependencies": {
@@ -35,7 +34,8 @@
     "@babel/register": "^7.18.9",
     "chai": "^4.3.6",
     "mocha": "^10.1.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "wait-on": "^6.0.1"
   },
   "scripts": {
     "dev": "NODE_ENV=development nodemon bin/observable-database-proxy.js",
