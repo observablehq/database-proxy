@@ -2,7 +2,6 @@
   "name": "@observablehq/database-proxy",
   "description": "A local proxy to connect private Observable notebooks to private databases",
   "version": "2.0.0",
-  "type": "commonjs",
   "engines": {
     "node": ">=14.19.0"
   },
