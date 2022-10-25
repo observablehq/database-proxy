@@ -68,5 +68,32 @@ describe("mssql", () => {
       );
       expect(row).to.equal(JSON.stringify({CustomerID: 12}));
     });
+
+    it("should stream the results of simple query", async () => {
+      const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+        sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer",
+        params: [],
+      });
+
+      const res = new MockRes(onEnd);
+
+      const index = mssql(credentials);
+      await index(req, res);
+
+      function onEnd() {
+        const [schema, row] = this._getString().split("\n");
+
+        expect(schema).to.equal(
+          JSON.stringify({
+            type: "array",
+            items: {
+              type: "object",
+              properties: {CustomerID: {type: ["null", "integer"]}},
+            },
+          })
+        );
+        expect(row).to.equal(JSON.stringify({CustomerID: 12}));
+      }
+    });
   });
 });
