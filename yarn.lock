@@ -3680,6 +3680,11 @@ mocha@^10.1.0:
     yargs-parser "20.2.4"
     yargs-unparser "2.0.0"
 
+mock-req@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mock-req/-/mock-req-0.2.0.tgz#749446804d2c006169342ee7be6bba1cffd534c2"
+  integrity sha512-IUuwS0W5GjoPyjhuXPQJXpaHfHW7UYFRia8Cchm/xRuyDDclpSQdEoakt3krOpSYvgVlQsbnf0ePDsTRDfp7Dg==
+
 mock-require@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/mock-require/-/mock-require-3.0.3.tgz#ccd544d9eae81dd576b3f219f69ec867318a1946"
@@ -3687,6 +3692,11 @@ mock-require@^3.0.3:
   dependencies:
     get-caller-file "^1.0.2"
     normalize-path "^2.1.1"
+
+mock-res@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/mock-res/-/mock-res-0.6.0.tgz#0543879ba2a1eb9511806c490a0c256e61eb74da"
+  integrity sha512-FCX7To1rh+0d+CaZNTU+3TF7IyhTRfsw5zwg6l8g+g7p6l46CwIyGMWV9dL8KuCrVx+ONPKrWi7C5J1eAUVPKA==
 
 moment-timezone@^0.5.15:
   version "0.5.38"
