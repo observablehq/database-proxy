@@ -25,6 +25,7 @@
     "pg-query-stream": "^4.2.1",
     "serialize-error": "^4.1.0",
     "snowflake-sdk": "^1.5.0",
+    "wait-on": "^6.0.1",
     "yargs": "^13.2.4"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development nodemon bin/observable-database-proxy.js",
-    "test": "mocha"
+    "test:local": "mocha"
   },
   "author": "Observable",
   "license": "ISC",
