@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-require = require("esm")(module);
-const exit = require("../lib/errors").exit;
-const {start, add, remove, reset, list} = require("../lib/commands");
+import {start, add, remove, reset, list} from "../lib/commands.js";
+import argv from "yargs";
 
-const name = yargs =>
+const name = (yargs) =>
   yargs.positional("name", {
     describe: "Database connector name",
-    type: "string"
+    type: "string",
   });
 
-const argv = require("yargs")
+argv
   .usage(`Usage: $0 <command> <name> [options]`)
   .command(
     `start <name> [options]`,
