@@ -1,7 +1,7 @@
 import mssql from "mssql";
-import {MSSQL_CREDENTIALS} from "../.env.test.mjs";
+import {MSSQL_CREDENTIALS} from "../.env.test.js";
 
-const credentials = MSSQL_CREDENTIALS
+const credentials = MSSQL_CREDENTIALS;
 
 const seed = async () => {
   await mssql.connect(credentials);
@@ -18,7 +18,7 @@ const seed = async () => {
                      BEGIN
                        CREATE LOGIN reader WITH PASSWORD = 're@derP@ssw0rd'
                        CREATE USER reader FOR LOGIN reader
-                     END`
+                     END`;
 };
 
 seed()
@@ -28,5 +28,5 @@ seed()
   })
   .catch((err) => {
     console.error(err.message, err);
-    process.exit(1)
+    process.exit(1);
   });
