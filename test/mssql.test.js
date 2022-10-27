@@ -11,34 +11,23 @@ const readOnlyCredentials = MSSQL_CREDENTIALS_READ_ONLY;
 describe("mssql", () => {
   describe("when checking", () => {
     describe("with system admin user", () => {
-      it.skip("should throw a too permissive error", async () => {
+      it("should throw a too permissive error", () => {
         const req = new MockReq({
           method: "POST",
           url: "/check",
         });
         const res = new MockRes();
         const index = mssql(credentials);
-        // Not clear how we would catch this error. Skipping.
-        expect(async function () {
-          await index(req, res);
-        }).to.throw();
 
-        expect(1).to.equal(1);
-      });
-    });
-    describe("with a simple read permission user", () => {
-      it.skip("should be ok", async () => {
-        const req = new MockReq({
-          method: "POST",
-          url: "/check",
-        });
-        const res = new MockRes();
-        const index = mssql(readOnlyCredentials);
-        await index(req, res);
-        // Not clear what are the verbs we should include as the READ_ONLY. Skipping.
-        const {ok} = res._getJSON();
-
-        expect(ok).to.equal(true);
+        return index(req, res).then(
+          () => Promise.reject("Expect call to throw!"),
+          (err) => {
+            expect(err.statusCode).to.equal(200);
+            expect(
+              err.message.includes("User has too permissive grants")
+            ).to.equal(true);
+          }
+        );
       });
     });
   });
