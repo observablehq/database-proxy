@@ -3,7 +3,7 @@ import MockReq from "mock-req";
 import MockRes from "mock-res";
 
 import {MSSQL_CREDENTIALS, MSSQL_CREDENTIALS_READ_ONLY} from "../.env.test.js";
-import mssql from "../lib/mssql.js";
+import mssql, {sanitizeForCellTag} from "../lib/mssql.js";
 
 const credentials = MSSQL_CREDENTIALS;
 const readOnlyCredentials = MSSQL_CREDENTIALS_READ_ONLY;
@@ -62,6 +62,89 @@ describe("mssql", () => {
           resolve();
         }
       });
+    });
+    it("should handle parameter graciously", () => {
+      return new Promise(async (resolve, reject) => {
+        const testCustomerId = 3;
+        const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          params: [testCustomerId],
+        });
+
+        const res = new MockRes(onEnd);
+
+        const index = mssql(credentials);
+        await index(req, res);
+
+        function onEnd() {
+          const [schema, row] = this._getString().split("\n");
+
+          expect(schema).to.equal(
+            JSON.stringify({
+              type: "array",
+              items: {
+                type: "object",
+                properties: {CustomerID: {type: ["null", "integer"]}},
+              },
+            })
+          );
+          expect(row).to.equal(JSON.stringify({CustomerID: testCustomerId}));
+
+          resolve();
+        }
+      });
+    });
+    it("should replace cell reference in the SQL query", () => {
+      return new Promise(async (resolve, reject) => {
+        const testCustomerId = 5;
+        const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=?",
+          params: [testCustomerId],
+        });
+
+        const res = new MockRes(onEnd);
+
+        const index = mssql(credentials);
+        await index(req, res);
+
+        function onEnd() {
+          const [schema, row] = this._getString().split("\n");
+
+          expect(schema).to.equal(
+            JSON.stringify({
+              type: "array",
+              items: {
+                type: "object",
+                properties: {CustomerID: {type: ["null", "integer"]}},
+              },
+            })
+          );
+          expect(row).to.equal(JSON.stringify({CustomerID: testCustomerId}));
+
+          resolve();
+        }
+      });
+    });
+  });
+
+  describe("when sanitizing sql from cell reference", () => {
+    it("should replace one ? with corresponding @TAG", () => {
+      const sql =
+        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=?";
+      const sanitized = sanitizeForCellTag(sql);
+
+      expect(sanitized).to.equal(
+        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1"
+      );
+    });
+    it("should replace multiple ? with corresponding @TAG", () => {
+      const sql =
+        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=? AND salesID=?";
+      const sanitized = sanitizeForCellTag(sql);
+
+      expect(sanitized).to.equal(
+        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1 AND salesID=@2"
+      );
     });
   });
 });
