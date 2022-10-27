@@ -3,7 +3,6 @@ module.exports = {
   extension: ["js"],
   global: [],
   ignore: [],
-  parallel: true,
   require: "@babel/register",
   spec: ["test/**/*.test.js"],
 };
