@@ -2,12 +2,10 @@ import {expect} from "chai";
 import MockReq from "mock-req";
 import MockRes from "mock-res";
 
-import {MSSQL_CREDENTIALS, MSSQL_CREDENTIALS_READ_ONLY} from "../.env.test.js";
+import {MSSQL_CREDENTIALS} from "../.env.test.js";
 import mssql, {sanitizeForCellTag} from "../lib/mssql.js";
 
 const credentials = MSSQL_CREDENTIALS;
-const readOnlyCredentials = MSSQL_CREDENTIALS_READ_ONLY;
-
 describe("mssql", () => {
   describe("when checking", () => {
     describe("with system admin user", () => {
