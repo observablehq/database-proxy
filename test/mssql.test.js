@@ -3,7 +3,7 @@ import MockReq from "mock-req";
 import MockRes from "mock-res";
 
 import {MSSQL_CREDENTIALS} from "../.env.test.js";
-import mssql, {sanitizeForCellTag} from "../lib/mssql.js";
+import mssql from "../lib/mssql.js";
 
 const credentials = MSSQL_CREDENTIALS;
 describe("mssql", () => {
@@ -65,7 +65,8 @@ describe("mssql", () => {
       return new Promise(async (resolve, reject) => {
         const testCustomerId = 3;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          sql:
+            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
@@ -96,7 +97,8 @@ describe("mssql", () => {
       return new Promise(async (resolve, reject) => {
         const testCustomerId = 5;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=?",
+          sql:
+            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
@@ -122,27 +124,6 @@ describe("mssql", () => {
           resolve();
         }
       });
-    });
-  });
-
-  describe("when sanitizing sql from cell reference", () => {
-    it("should replace one ? with corresponding @TAG", () => {
-      const sql =
-        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=?";
-      const sanitized = sanitizeForCellTag(sql);
-
-      expect(sanitized).to.equal(
-        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1"
-      );
-    });
-    it("should replace multiple ? with corresponding @TAG", () => {
-      const sql =
-        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=? AND salesID=?";
-      const sanitized = sanitizeForCellTag(sql);
-
-      expect(sanitized).to.equal(
-        "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1 AND salesID=@2"
-      );
     });
   });
 });
