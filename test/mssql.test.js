@@ -3,7 +3,7 @@ import MockReq from "mock-req";
 import MockRes from "mock-res";
 
 import {MSSQL_CREDENTIALS} from "../.env.test.js";
-import mssql from "../lib/mssql.js";
+import mssql, {dataTypeSchema} from "../lib/mssql.js";
 
 const credentials = MSSQL_CREDENTIALS;
 describe("mssql", () => {
@@ -65,8 +65,7 @@ describe("mssql", () => {
       return new Promise(async (resolve, reject) => {
         const testCustomerId = 3;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql:
-            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
@@ -97,8 +96,7 @@ describe("mssql", () => {
       return new Promise(async (resolve, reject) => {
         const testCustomerId = 5;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql:
-            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
@@ -124,6 +122,14 @@ describe("mssql", () => {
           resolve();
         }
       });
+    });
+  });
+
+  describe("when check the dataTypeSchema", () => {
+    it("should TYPES.Image.name to object", () => {
+      const {type} = dataTypeSchema({type: "Image"});
+      expect(type[0]).to.equal("null");
+      expect(type[1]).to.equal("object");
     });
   });
 });
