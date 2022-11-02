@@ -19,7 +19,7 @@ services:
       - MSSQL_DATABASE=test
       - MSSQL_SLEEP=7
     volumes:
-      - ./data/test_mssql.bak:/var/opt/mssql/backup/test.bak
+      - ./data/AdventureWorks2019.bak:/var/opt/mssql/backup/test.bak
     ports:
       - "1433:1433"
     networks:
