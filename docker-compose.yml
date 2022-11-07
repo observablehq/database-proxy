@@ -25,6 +25,23 @@ services:
     networks:
       - db_proxy_test
 
+  # See: https://github.com/oracle/docker-images/blob/main/OracleDatabase/SingleInstance/README.md
+  oracle:
+    image: oracle/database:21.3.0-ee
+    environment:
+      - ORACLE_SID=ORCLCDB
+      - ORACLE_PDB=ORCLPDB1
+      - ORACLE_PWD=password
+      - ORACLE_EDITION=standard
+      - ORACLE_CHARACTERSET=AL32UTF8
+      - ENABLE_ARCHIVELOG=false
+      - ENABLE_TCPS=false
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    networks:
+      - db_proxy_test
+
 networks:
   db_proxy_test:
     name: db_proxy_test
