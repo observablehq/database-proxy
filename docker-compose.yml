@@ -25,20 +25,15 @@ services:
     networks:
       - db_proxy_test
 
-  # See: https://github.com/oracle/docker-images/blob/main/OracleDatabase/SingleInstance/README.md
+  # See: https://container-registry.oracle.com/ords/f?p=113:4:109051340591251:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:803,803,Oracle%20Database%20Express%20Edition,Oracle%20Database%20Express%20Edition,1,0&cs=3U3yX0UjhzV9F9CswhN6bOzEYSSkxEr0oeYSe-Cnlwch7RddYePpKmX_yJdDWY4CXTKMh-unDVZQuhDGocBEWfg
   oracle:
-    image: oracle/database:21.3.0-ee
-    environment:
-      - ORACLE_SID=ORCLCDB
-      - ORACLE_PDB=ORCLPDB1
-      - ORACLE_PWD=password
-      - ORACLE_EDITION=standard
-      - ORACLE_CHARACTERSET=AL32UTF8
-      - ENABLE_ARCHIVELOG=false
-      - ENABLE_TCPS=false
+    image: container-registry.oracle.com/database/enterprise:21.3.0.0
+    container_name: oracle_db
     ports:
       - "1521:1521"
       - "5500:5500"
+    environment:
+      - ORACLE_PWD=AvErYsEcUrEpAsSw0rD
     networks:
       - db_proxy_test
 
