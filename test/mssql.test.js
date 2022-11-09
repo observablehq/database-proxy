@@ -123,6 +123,67 @@ describe("mssql", () => {
         }
       });
     });
+    it("should handle duplicated column names", () => {
+      return new Promise(async (resolve, reject) => {
+        const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+          sql: "SELECT 1 as _a1, 2 as _a1 FROM test.SalesLT.SalesOrderDetail",
+          params: [],
+        });
+
+        const res = new MockRes(onEnd);
+
+        const index = mssql(credentials);
+        await index(req, res);
+
+        function onEnd() {
+          const [schema, row] = this._getString().split("\n");
+
+          expect(row).to.equal(
+            JSON.stringify({
+              _a1: 2,
+            })
+          );
+
+          resolve();
+        }
+      });
+    });
+    it("should select the last value of any detected duplicated columns", () => {
+      return new Promise(async (resolve, reject) => {
+        const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+          sql: "SELECT TOP 1 ModifiedDate, ModifiedDate FROM test.SalesLT.SalesOrderDetail",
+          params: [],
+        });
+
+        const res = new MockRes(onEnd);
+
+        const index = mssql(credentials);
+        await index(req, res);
+
+        function onEnd() {
+          const [schema, row] = this._getString().split("\n");
+
+          expect(schema).to.equal(
+            JSON.stringify({
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  ModifiedDate: {type: ["null", "string"], date: true},
+                },
+              },
+            })
+          );
+          expect(row).to.equal(
+            JSON.stringify({
+              ModifiedDate: "2008-06-01T00:00:00.000Z",
+            })
+          );
+
+          resolve();
+        }
+      });
+    });
   });
 
   describe("when check the dataTypeSchema", () => {
