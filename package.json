@@ -23,6 +23,7 @@
     "mssql": "^9.0.1",
     "mysql": "^2.17.1",
     "open": "^6.3.0",
+    "oracledb": "https://github.com/oracle/node-oracledb/releases/download/v5.5.0/oracledb-src-5.5.0.tgz",
     "pg": "^8.7.1",
     "pg-query-stream": "^4.2.1",
     "serialize-error": "^4.1.0",
