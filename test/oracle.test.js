@@ -30,4 +30,37 @@ describe("oracle", () => {
       });
     });
   });
+
+  describe("when querying", () => {
+    it("should stream the results of simple query", () => {
+      return new Promise(async (resolve, reject) => {
+        const req = new MockReq({method: "POST", url: "/query-stream"}).end({
+          sql: "SELECT 1 AS A_1 FROM nodetab",
+          params: [],
+        });
+
+        const res = new MockRes(onEnd);
+
+        const index = oracle(credentials);
+        await index(req, res);
+
+        function onEnd() {
+          const [schema, row] = this._getString().split("\n");
+
+          expect(schema).to.equal(
+            JSON.stringify({
+              type: "array",
+              items: {
+                type: "object",
+                properties: {CustomerID: {type: ["null", "integer"]}},
+              },
+            })
+          );
+          expect(row).to.equal(JSON.stringify({CustomerID: 12}));
+
+          resolve();
+        }
+      });
+    });
+  });
 });
