@@ -5,12 +5,12 @@ import MockRes from "mock-res";
 import oracle from "../lib/oracle.js";
 import {ORACLE_CREDENTIALS} from "../.env.test.js";
 
-const credentials = ORACLE_CREDENTIALS;
+const credentials = JSON.parse(ORACLE_CREDENTIALS);
 
-describe("oracle", async (done) => {
+describe("oracle", () => {
   describe("when checking", () => {
-    describe("with a READ_ONLY user", () => {
-      it("should return ok", async () => {
+    describe("with system admin user", () => {
+      it("should throw a too permissive error", () => {
         const req = new MockReq({
           method: "POST",
           url: "/check",
@@ -18,10 +18,15 @@ describe("oracle", async (done) => {
         const res = new MockRes();
         const index = oracle(credentials);
 
-        const response = await index(req, res);
-
-        expect(response.statusCode).to.equal(200);
-        expect(response.body.ok).to.equal(true);
+        return index(req, res).then(
+          () => Promise.reject("Expect call to throw!"),
+          (err) => {
+            expect(err.statusCode).to.equal(200);
+            expect(
+              err.message.includes("User has too permissive grants")
+            ).to.equal(true);
+          }
+        );
       });
     });
   });
