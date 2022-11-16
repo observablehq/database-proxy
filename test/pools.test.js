@@ -1,7 +1,9 @@
 import {expect, assert} from "chai";
 import mssql from "mssql";
 import {MSSQL_CREDENTIALS} from "../.env.test.js";
+
 import pools, {pools as globalPool} from "../lib/pools.js";
+import {addToPools} from "../lib/mssql.js";
 
 const mssql_creds = MSSQL_CREDENTIALS;
 
@@ -9,7 +11,7 @@ describe("pools", () => {
   describe("when working with mssql", () => {
     let pool;
     before(async () => {
-      pool = await pools.get(JSON.stringify(mssql_creds), mssql_creds, "mssql");
+      pool = await pools.get(mssql_creds, addToPools);
     });
 
     it("should add and get a mssql pool of connection to the global pool", async () => {
@@ -18,31 +20,23 @@ describe("pools", () => {
   });
 
   describe("when finding wrong config or driver", () => {
-    it("should throw if no config", () => {
+    it("should throw if no addToPools", () => {
       assert.throws(
-        () => pools.get("NOT_A_VALID_DRIVER", null),
+        () => pools.get(null, null),
         "Database configuration required"
       );
     });
-
-    it("should throw if no driver", () => {
+    it("should throw if no addToPools", () => {
       assert.throws(
-        () => pools.get("NOT_A_VALID_DRIVER", {}, null),
-        "Driver is required"
-      );
-    });
-
-    it("should throw if driver is not supported", () => {
-      assert.throws(
-        () => pools.get("NOT_A_VALID_DRIVER", {}, "NOT_A_VALID_DRIVER"),
-        "Driver must be one of: mssql"
+        () => pools.get({name: "NOT_A_VALID_DRIVER"}, null),
+        "Setup callback is required"
       );
     });
   });
 
   describe("when onCloseAll", () => {
     before(async () => {
-      await pools.get(JSON.stringify(mssql_creds), mssql_creds, "mssql");
+      await pools.get(mssql_creds, addToPools);
     });
 
     it("should delete all pools from the global pool", async () => {
