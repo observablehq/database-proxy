@@ -1,3 +1,4 @@
+export const ORACLE_CREDENTIALS = env("ORACLE_CREDENTIALS");
 export const MSSQL_CREDENTIALS = env("MSSQL_CREDENTIALS");
 export const NODE_ENV = env("NODE_ENV");
 
