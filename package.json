@@ -11,8 +11,7 @@
     "./mysql.js": "./lib/mysql.js",
     "./snowflake.js": "./lib/snowflake.js",
     "./mssql.js": "./lib/mssql.js",
-    "./oracle.js": "./lib/oracle.js",
-    "./pools.js": "./lib/pools.js"
+    "./oracle.js": "./lib/oracle.js"
   },
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy.js"
