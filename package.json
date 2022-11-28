@@ -10,8 +10,7 @@
     "./postgres.js": "./lib/postgres.js",
     "./mysql.js": "./lib/mysql.js",
     "./snowflake.js": "./lib/snowflake.js",
-    "./mssql.js": "./lib/mssql.js",
-    "./pools.js": "./lib/pools.js"
+    "./mssql.js": "./lib/mssql.js"
   },
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy.js"
