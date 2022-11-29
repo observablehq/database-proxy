@@ -1,6 +1,4 @@
-
 export const MSSQL_CREDENTIALS = env("MSSQL_CREDENTIALS");
-export const MSSQL_CREDENTIALS_READ_ONLY = env("MSSQL_CREDENTIALS_READ_ONLY");
 export const NODE_ENV = env("NODE_ENV");
 
 function env(key, defaultValue) {
