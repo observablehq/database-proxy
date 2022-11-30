@@ -44,6 +44,7 @@
     "oracledb": "https://github.com/oracle/node-oracledb/releases/download/v5.5.0/oracledb-src-5.5.0.tgz"
   },
   "scripts": {
+    "start": "nodemon bin/observable-database-proxy.js",
     "dev": "NODE_ENV=development nodemon bin/observable-database-proxy.js",
     "test": "mocha",
     "test:local": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build",
