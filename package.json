@@ -10,7 +10,8 @@
     "./postgres.js": "./lib/postgres.js",
     "./mysql.js": "./lib/mysql.js",
     "./snowflake.js": "./lib/snowflake.js",
-    "./mssql.js": "./lib/mssql.js"
+    "./mssql.js": "./lib/mssql.js",
+    "./oracle.js": "./lib/oracle.js"
   },
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy.js"
@@ -39,7 +40,11 @@
     "nodemon": "^1.19.1",
     "wait-on": "^6.0.1"
   },
+  "peerDependencies": {
+    "oracledb": "https://github.com/oracle/node-oracledb/releases/download/v5.5.0/oracledb-src-5.5.0.tgz"
+  },
   "scripts": {
+    "start": "nodemon bin/observable-database-proxy.js",
     "dev": "NODE_ENV=development nodemon bin/observable-database-proxy.js",
     "test": "mocha",
     "test:local": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build",
