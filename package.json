@@ -11,12 +11,14 @@
     "./mysql.js": "./lib/mysql.js",
     "./snowflake.js": "./lib/snowflake.js",
     "./mssql.js": "./lib/mssql.js",
-    "./oracle.js": "./lib/oracle.js"
+    "./oracle.js": "./lib/oracle.js",
+    "./databricks.js": "./lib/databricks.js"
   },
   "bin": {
     "observable-database-proxy": "./bin/observable-database-proxy.js"
   },
   "dependencies": {
+    "@databricks/sql": "^1.0.0",
     "JSONStream": "^1.3.5",
     "ajv": "^8.11.0",
     "micro": "^9.3.4",
