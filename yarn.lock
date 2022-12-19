@@ -1119,10 +1119,9 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@databricks/sql@^1.0.0":
+"@databricks/sql@https://github.com/databricks/databricks-sql-nodejs#3df43263184aeaab1b473e65dfe08cb8fa9daaf4":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@databricks/sql/-/sql-1.0.0.tgz#aa12de5a364c1d15584de9807949e5ac957cef2d"
-  integrity sha512-73NVxH0tAVV/u2ns0T3tYpOvvAQ5kTFoQZATHpSlBBQRwTPKmzvHsq+jbpex/wqescoQ6TW9ZRf7W8sO4w2z4g==
+  resolved "https://github.com/databricks/databricks-sql-nodejs#3df43263184aeaab1b473e65dfe08cb8fa9daaf4"
   dependencies:
     commander "^9.3.0"
     node-int64 "^0.4.0"

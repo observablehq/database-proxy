@@ -18,7 +18,7 @@
     "observable-database-proxy": "./bin/observable-database-proxy.js"
   },
   "dependencies": {
-    "@databricks/sql": "^1.0.0",
+    "@databricks/sql": "https://github.com/databricks/databricks-sql-nodejs#3df43263184aeaab1b473e65dfe08cb8fa9daaf4",
     "JSONStream": "^1.3.5",
     "ajv": "^8.11.0",
     "micro": "^9.3.4",
