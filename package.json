@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "oracledb": "https://github.com/oracle/node-oracledb/releases/download/v5.5.0/oracledb-src-5.5.0.tgz",
-    "@databricks/sql": "https://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@github.com/observablehq/databricks-sql-nodejs#v1.1.1-obs.0"
+    "@databricks/sql": "1.0.0"
   },
   "scripts": {
     "start": "nodemon bin/observable-database-proxy.js",
