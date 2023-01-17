@@ -11,18 +11,18 @@ Install the database proxy locally or globally with `npm` or `yarn`:
   yarn global add @observablehq/database-proxy
 ```
 
-### Using the Oracle driver
+### Installing for Oracle Databases
 
-To use the Oracle database client, you will need to install the `oracledb` npm library with `npm` or `yarn`: 
+To use the Oracle database client, you will also need to install the `oracledb` npm library with `npm` or `yarn`: 
 ```
   npm install -g oracledb
   yarn global add oracldeb
 ```
 #### Architecture 
-Node-oracledb is an [add-on](https://nodejs.org/api/addons.html) available as C source code. Pre-built binaries are available as a convenience for common architectures (Windows 64-bit, Linux x86_64, and macOS (Intel x86)). For other architectures (i.e macOS (ARM64)), you will need to build from the source code as described [here](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html#quick-start-node-oracledb-installation). 
+Node-oracledb is an [add-on](https://nodejs.org/api/addons.html) available as C source code. Pre-built binaries are available as a convenience for common architectures (Windows 64-bit, Linux x86_64, and macOS (Intel x86)). For other architectures (i.e `macOS (ARM64)`), you will need to build from the source code as described [here](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html#quick-start-node-oracledb-installation). 
 
 #### Oracle Client Library
-The Oracle Client libraries version 21, 19, 18, 12, or 11.2 to be installed in your operating system library search path such as PATH on Windows or LD_LIBRARY_PATH on Linux. On macOS link the libraries to /usr/local/lib.
+One of the Oracle Client libraries version 21, 19, 18, 12, or 11.2 needs to be installed in your operating system library search path such as `PATH` on Windows or `LD_LIBRARY_PATH` on Linux. On macOS link the libraries to `/usr/local/lib`.
 
 For more information see [node-oracldb](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html) documentation.
 
