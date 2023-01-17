@@ -1,6 +1,6 @@
 # @observablehq/database-proxy
 
-The database proxy is a simple Node.js webserver that accepts secure requests from your Observable notebooks, and proxies queries to a PostgreSQL or MySQL database — one that is not necessarily exposed to the web. You can use the database proxy to securely connect to databases on your local computer, on an intranet or within a VPN.
+The database proxy is a simple Node.js webserver that accepts secure requests from your Observable notebooks, and proxies queries to a PostgreSQL, MySQL, Snowflake, SQL Server, Databricks or Oracle database — one that is not necessarily exposed to the web. You can use the database proxy to securely connect to databases on your local computer, on an intranet or within a VPN.
 
 ## Installation
 
@@ -10,6 +10,21 @@ Install the database proxy locally or globally with `npm` or `yarn`:
   npm install -g @observablehq/database-proxy
   yarn global add @observablehq/database-proxy
 ```
+
+### Using the Oracle driver
+
+To use the Oracle database client, you will need to install the `oracledb` npm library with `npm` or `yarn`: 
+```
+  npm install -g oracledb
+  yarn global add oracldeb
+```
+#### Architecture 
+Node-oracledb is an [add-on](https://nodejs.org/api/addons.html) available as C source code. Pre-built binaries are available as a convenience for common architectures (Windows 64-bit, Linux x86_64, and macOS (Intel x86)). For other architectures (i.e macOS (ARM64)), you will need to build from the source code as described [here](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html#quick-start-node-oracledb-installation). 
+
+#### Oracle Client Library
+The Oracle Client libraries version 21, 19, 18, 12, or 11.2 to be installed in your operating system library search path such as PATH on Windows or LD_LIBRARY_PATH on Linux. On macOS link the libraries to /usr/local/lib.
+
+For more information see [node-oracldb](https://node-oracledb.readthedocs.io/en/latest/user_guide/installation.html) documentation.
 
 ## Running the database proxy
 
@@ -47,3 +62,5 @@ If you’re using Firefox or Safari, or if you wish to run the database proxy on
 ## Using from notebooks
 
 After the proxy is running, in one of your private notebooks, use `DatabaseClient("name")` to create a database client pointed at your local proxy. When querying, your data and database credentials never leave your local computer. Please check [this notebook for more information on how to use it from Observable](https://observablehq.com/@observablehq/self-hosted-database-proxies)
+
+
