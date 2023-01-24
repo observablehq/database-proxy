@@ -1,5 +1,7 @@
 FROM node:18.12.1-alpine
 
+RUN apk update && apk --no-cache add git
+
 RUN mkdir /app
 WORKDIR /app
 
