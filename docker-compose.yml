@@ -5,11 +5,12 @@ services:
     build: .
     depends_on:
       - mssql
+      - mysql
     env_file:
       - .env.test
     networks:
       - db_proxy_test
-    command: sh -c "set -o pipefail && wait-on -d 10000 -t 30000 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha"
+    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha"
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -20,8 +21,13 @@ services:
       - MSSQL_SLEEP=7
     volumes:
       - ./data/AdventureWorks2019.bak:/var/opt/mssql/backup/test.bak
-    ports:
-      - "1433:1433"
+    networks:
+      - db_proxy_test
+
+  mysql:
+    image: mariadb:10.6.4
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
     networks:
       - db_proxy_test
 
