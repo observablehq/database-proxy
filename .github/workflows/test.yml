@@ -28,9 +28,7 @@ jobs:
 
       - name: Build
         if: ${{ steps.republish.outcome != 'success' }}
-        run: |
-          touch .env.test
-          docker-compose build
+        run: docker-compose build
       - name: Lint
         if: ${{ steps.republish.outcome != 'success' }}
         run: docker-compose run lint
