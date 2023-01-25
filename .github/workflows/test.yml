@@ -38,8 +38,3 @@ jobs:
       - name: Container logs
         if: failure()
         run: docker-compose logs --no-color --timestamps
-      - name: Publish
-        if: ${{ steps.republish.outcome != 'success' }}
-        run: |
-          docker tag database-proxy_test:latest ${DOCKER_PACKAGE}:${GITHUB_SHA}
-          ../.github/retry docker push ${DOCKER_PACKAGE}:${GITHUB_SHA}
