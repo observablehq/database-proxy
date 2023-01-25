@@ -12,7 +12,7 @@ module.exports = {
     {
       files: ["*.test.js"],
       env: {
-        jest: true
+        mocha: true
       }
     }
   ]

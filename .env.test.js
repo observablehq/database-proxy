@@ -1,4 +1,5 @@
 export const MSSQL_CREDENTIALS = env("MSSQL_CREDENTIALS");
+export const MYSQL_CREDENTIALS = env("MYSQL_CREDENTIALS");
 export const NODE_ENV = env("NODE_ENV");
 
 function env(key, defaultValue) {
