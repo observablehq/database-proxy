@@ -32,7 +32,7 @@ describe("mssql", () => {
 
   describe("when querying", () => {
     it("should stream the results of simple query", () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve) => {
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
           sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer",
           params: [],
@@ -41,7 +41,7 @@ describe("mssql", () => {
         const res = new MockRes(onEnd);
 
         const index = mssql(credentials);
-        await index(req, res);
+        index(req, res);
 
         function onEnd() {
           const [schema, row] = this._getString().split("\n");
@@ -62,17 +62,18 @@ describe("mssql", () => {
       });
     });
     it("should handle parameter graciously", () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve) => {
         const testCustomerId = 3;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          sql:
+            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
         const res = new MockRes(onEnd);
 
         const index = mssql(credentials);
-        await index(req, res);
+        index(req, res);
 
         function onEnd() {
           const [schema, row] = this._getString().split("\n");
@@ -93,17 +94,18 @@ describe("mssql", () => {
       });
     });
     it("should replace cell reference in the SQL query", () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve) => {
         const testCustomerId = 5;
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+          sql:
+            "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
           params: [testCustomerId],
         });
 
         const res = new MockRes(onEnd);
 
         const index = mssql(credentials);
-        await index(req, res);
+        index(req, res);
 
         function onEnd() {
           const [schema, row] = this._getString().split("\n");
@@ -124,7 +126,7 @@ describe("mssql", () => {
       });
     });
     it("should handle duplicated column names", () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve) => {
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
           sql: "SELECT 1 as _a1, 2 as _a1 FROM test.SalesLT.SalesOrderDetail",
           params: [],
@@ -133,10 +135,10 @@ describe("mssql", () => {
         const res = new MockRes(onEnd);
 
         const index = mssql(credentials);
-        await index(req, res);
+        index(req, res);
 
         function onEnd() {
-          const [schema, row] = this._getString().split("\n");
+          const [, row] = this._getString().split("\n");
 
           expect(row).to.equal(
             JSON.stringify({
@@ -149,16 +151,17 @@ describe("mssql", () => {
       });
     });
     it("should select the last value of any detected duplicated columns", () => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve) => {
         const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-          sql: "SELECT TOP 1 ModifiedDate, ModifiedDate FROM test.SalesLT.SalesOrderDetail",
+          sql:
+            "SELECT TOP 1 ModifiedDate, ModifiedDate FROM test.SalesLT.SalesOrderDetail",
           params: [],
         });
 
         const res = new MockRes(onEnd);
 
         const index = mssql(credentials);
-        await index(req, res);
+        index(req, res);
 
         function onEnd() {
           const [schema, row] = this._getString().split("\n");

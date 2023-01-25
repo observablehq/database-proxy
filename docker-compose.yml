@@ -1,6 +1,10 @@
 version: "3.7"
 
 services:
+  lint:
+    build: .
+    command: eslint .
+
   test:
     build: .
     depends_on:
