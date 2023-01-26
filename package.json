@@ -19,8 +19,10 @@
   },
   "dependencies": {
     "@databricks/sql": "https://github.com/observablehq/databricks-sql-nodejs",
+    "@sentry/node": "^7.33.0",
     "JSONStream": "^1.3.5",
     "ajv": "^8.11.0",
+    "lru-cache": "^7.14.1",
     "micro": "^9.3.4",
     "mssql": "^9.0.1",
     "mysql2": "^3.0.1",
