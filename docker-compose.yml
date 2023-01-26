@@ -10,11 +10,12 @@ services:
     depends_on:
       - mssql
       - mysql
+      - oracle
     env_file:
       - .env.test
     networks:
       - db_proxy_test
-    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
+    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:oracle:1521 tcp:mysql:3306 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -32,6 +33,15 @@ services:
     image: mariadb:10.6.4
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+    networks:
+      - db_proxy_test
+
+  oracle:
+    image: gvenzl/oracle-xe
+    environment:
+      - ORACLE_PASSWORD=p@ssw0rd
+    ports:
+      - 1521:1521
     networks:
       - db_proxy_test
 
