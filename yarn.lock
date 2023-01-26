@@ -190,7 +190,7 @@
     jsonwebtoken "^8.5.1"
     uuid "^8.3.0"
 
-"@azure/storage-blob@^12.5.0":
+"@azure/storage-blob@^12.11.0":
   version "12.12.0"
   resolved "https://registry.yarnpkg.com/@azure/storage-blob/-/storage-blob-12.12.0.tgz#25e277c885692d5adcd8c2a949789b2837a74c59"
   integrity sha512-o/Mf6lkyYG/eBW4/hXB9864RxVNmAkcKHjsGR6Inlp5hupa3exjSyH2KjO3tLO//YGA+tS+17hM2bxRl9Sn16g==
@@ -3797,7 +3797,7 @@ moment-timezone@^0.5.15:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.29.3:
+"moment@>= 2.9.0", moment@^2.29.4:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -4250,7 +4250,7 @@ pg-types@^2.1.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-pg@^8.7.1:
+pg@^8.7.3:
   version "8.8.0"
   resolved "https://registry.yarnpkg.com/pg/-/pg-8.8.0.tgz#a77f41f9d9ede7009abfca54667c775a240da686"
   integrity sha512-UXYN0ziKj+AeNNP7VDMwrehpACThH7LUl/p8TDFpEUuSejCUIwGSfxpHsPvtM6/WXFy6SU4E5RG4IJV/TZAGjw==
@@ -4855,12 +4855,12 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snowflake-sdk@^1.5.0:
-  version "1.6.14"
-  resolved "https://registry.yarnpkg.com/snowflake-sdk/-/snowflake-sdk-1.6.14.tgz#7e1fd52df738c3cdb74277b7b2b35a40394c1941"
-  integrity sha512-sKg17Yz1/aydKxlA4unlprH+uw9ZsvRezdUmamLjNlvsXQsw+pok4PoMeCKtWs2OSVFnX0VO3eSacCPglQrAQA==
+snowflake-sdk@^1.6.11:
+  version "1.6.17"
+  resolved "https://registry.yarnpkg.com/snowflake-sdk/-/snowflake-sdk-1.6.17.tgz#dc002b44b6545d6a036a2ce3c1f34dd4f4353c42"
+  integrity sha512-ui2zRPbXIK3qaW8zuQCy+mHTieN6U5yeoJmKkyhdnh/8qKOqfR9Csj5nv+bXm8Y64kG24sybtIfCzf8C9abUMQ==
   dependencies:
-    "@azure/storage-blob" "^12.5.0"
+    "@azure/storage-blob" "^12.11.0"
     "@techteamer/ocsp" "1.0.0"
     agent-base "^6.0.2"
     asn1.js-rfc2560 "^5.0.0"
@@ -4880,7 +4880,7 @@ snowflake-sdk@^1.5.0:
     mime-types "^2.1.29"
     mkdirp "^1.0.3"
     mock-require "^3.0.3"
-    moment "^2.29.3"
+    moment "^2.29.4"
     moment-timezone "^0.5.15"
     open "^7.3.1"
     python-struct "^1.1.3"
