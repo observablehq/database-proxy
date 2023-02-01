@@ -1,0 +1,40 @@
+name: Test
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: .
+    env:
+      DOCKER_PACKAGE: ghcr.io/${{ github.repository }}/database-proxy_test
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker login
+        run: echo ${GITHUB_TOKEN} | docker login -u ${GITHUB_ACTOR} --password-stdin ghcr.io
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Republish
+        id: republish
+        continue-on-error: true
+        if: ${{ needs.Changes.outputs.connector == 'false' }}
+        run: |
+          ../.github/retry docker pull ${DOCKER_PACKAGE}:${{ github.event.before }}
+          docker tag ${DOCKER_PACKAGE}:${{ github.event.before }} ${DOCKER_PACKAGE}:${GITHUB_SHA}
+          ../.github/retry docker push ${DOCKER_PACKAGE}:${GITHUB_SHA}
+
+      - name: Build
+        if: ${{ steps.republish.outcome != 'success' }}
+        run: docker-compose build
+      - name: Lint
+        if: ${{ steps.republish.outcome != 'success' }}
+        run: docker-compose run lint
+      - name: Test
+        if: ${{ steps.republish.outcome != 'success' }}
+        run: docker-compose run test
+      - name: Container logs
+        if: failure()
+        run: docker-compose logs --no-color --timestamps

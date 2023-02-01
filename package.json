@@ -38,10 +38,13 @@
     "@babel/preset-env": "^7.19.4",
     "@babel/register": "^7.18.9",
     "chai": "^4.3.6",
+    "eslint": "^8.32.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "mocha": "^10.1.0",
     "mock-req": "^0.2.0",
     "mock-res": "^0.6.0",
     "nodemon": "^1.19.1",
+    "prettier": "^2.8.3",
     "wait-on": "^6.0.1"
   },
   "peerDependencies": {
@@ -53,7 +56,7 @@
     "test": "mocha",
     "test:local": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build",
     "test:ci": "docker-compose -f docker-compose.yml up --build --exit-code-from test",
-    "test:db": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up mssql"
+    "test:db": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up mssql mysql"
   },
   "author": "Observable",
   "license": "ISC",

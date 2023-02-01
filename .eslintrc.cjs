@@ -1,7 +1,7 @@
 module.exports = {
   parserOptions: {
     sourceType: "module",
-    ecmaVersion: 2018
+    ecmaVersion: 2022
   },
   env: {
     node: true,
@@ -12,7 +12,7 @@ module.exports = {
     {
       files: ["*.test.js"],
       env: {
-        jest: true
+        mocha: true
       }
     }
   ]
