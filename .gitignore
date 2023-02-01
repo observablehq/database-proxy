@@ -1,2 +1,4 @@
 node_modules
 ssl/localhost.csr
+
+*.secret

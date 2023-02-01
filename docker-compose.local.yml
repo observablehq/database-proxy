@@ -1,6 +1,10 @@
 version: "3.7"
 
 services:
+  test:
+    env_file:
+      - .env.secret
+
   mssql:
     image: mcr.microsoft.com/azure-sql-edge
     ports:

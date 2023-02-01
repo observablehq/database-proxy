@@ -13,6 +13,8 @@ services:
       - postgres
     env_file:
       - .env.test
+    environment:
+      - SNOWFLAKE_CREDENTIALS
     networks:
       - db_proxy_test
     command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 tcp:postgres:5432 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
