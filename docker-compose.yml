@@ -38,9 +38,6 @@ services:
 
   postgres:
     image: postgres:13.8-alpine3.16
-    volumes:
-      - ./data/schema.sql:/docker-entrypoint-initdb.d/00-schema.sql:ro
-      - ./data/data.sql:/docker-entrypoint-initdb.d/01-data.sql:ro
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
