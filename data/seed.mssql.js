@@ -1,7 +1,7 @@
 import mssql from "mssql";
-import {MSSQL_CREDENTIALS} from "../.env.test.js";
+import {MSSQL_TEST_CREDENTIALS} from "../.env.test.js";
 
-const credentials = MSSQL_CREDENTIALS;
+const credentials = MSSQL_TEST_CREDENTIALS;
 
 const seed = async () => {
   await mssql.connect(credentials);

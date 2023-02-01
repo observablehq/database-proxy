@@ -4,8 +4,8 @@ import MockRes from "mock-res";
 import logger from "../middleware/logger.js";
 import pg, {pools} from "../lib/postgres.js";
 
-import {POSTGRES_CREDENTIALS} from "../.env.test.js";
-const index = logger(pg(POSTGRES_CREDENTIALS));
+import {POSTGRES_TEST_CREDENTIALS} from "../.env.test.js";
+const index = logger(pg(POSTGRES_TEST_CREDENTIALS));
 
 describe("postgreSQL", () => {
   after(() => pools.end());

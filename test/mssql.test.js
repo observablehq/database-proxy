@@ -2,10 +2,10 @@ import assert from "node:assert";
 import MockReq from "mock-req";
 import MockRes from "mock-res";
 
-import {MSSQL_CREDENTIALS} from "../.env.test.js";
+import {MSSQL_TEST_CREDENTIALS} from "../.env.test.js";
 import mssql, {dataTypeSchema, pools} from "../lib/mssql.js";
 
-const credentials = MSSQL_CREDENTIALS;
+const credentials = MSSQL_TEST_CREDENTIALS;
 describe("SQL Server", () => {
   after(() => pools.end());
 

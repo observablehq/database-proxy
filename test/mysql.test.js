@@ -4,8 +4,8 @@ import MockRes from "mock-res";
 import logger from "../middleware/logger.js";
 import mysql, {pools} from "../lib/mysql.js";
 
-import {MYSQL_CREDENTIALS} from "../.env.test.js";
-const index = logger(mysql(MYSQL_CREDENTIALS));
+import {MYSQL_TEST_CREDENTIALS} from "../.env.test.js";
+const index = logger(mysql(MYSQL_TEST_CREDENTIALS));
 
 describe("MySQL", () => {
   after(() => pools.end());
