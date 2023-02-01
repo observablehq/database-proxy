@@ -3,10 +3,12 @@ import MockReq from "mock-req";
 import MockRes from "mock-res";
 
 import {MSSQL_CREDENTIALS} from "../.env.test.js";
-import mssql, {dataTypeSchema} from "../lib/mssql.js";
+import mssql, {dataTypeSchema, pools} from "../lib/mssql.js";
 
 const credentials = MSSQL_CREDENTIALS;
 describe("SQL Server", () => {
+  after(() => pools.end());
+
   describe("when checking", () => {
     it("should throw a too permissive error", async () => {
       const req = new MockReq({
@@ -60,8 +62,7 @@ describe("SQL Server", () => {
     it("should handle parameter graciously", (done) => {
       const testCustomerId = 3;
       const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-        sql:
-          "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+        sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
         params: [testCustomerId],
       });
 
@@ -92,8 +93,7 @@ describe("SQL Server", () => {
     it("should replace cell reference in the SQL query", (done) => {
       const testCustomerId = 5;
       const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-        sql:
-          "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
+        sql: "SELECT TOP 2 CustomerID FROM test.SalesLT.Customer WHERE CustomerID=@1",
         params: [testCustomerId],
       });
 
@@ -148,8 +148,7 @@ describe("SQL Server", () => {
 
     it("should select the last value of any detected duplicated columns", (done) => {
       const req = new MockReq({method: "POST", url: "/query-stream"}).end({
-        sql:
-          "SELECT TOP 1 ModifiedDate, ModifiedDate FROM test.SalesLT.SalesOrderDetail",
+        sql: "SELECT TOP 1 ModifiedDate, ModifiedDate FROM test.SalesLT.SalesOrderDetail",
         params: [],
       });
 

@@ -10,11 +10,12 @@ services:
     depends_on:
       - mssql
       - mysql
+      - postgres
     env_file:
       - .env.test
     networks:
       - db_proxy_test
-    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
+    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 tcp:postgres:5432 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -32,6 +33,16 @@ services:
     image: mariadb:10.6.4
     environment:
       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+    networks:
+      - db_proxy_test
+
+  postgres:
+    image: postgres:13.8-alpine3.16
+    volumes:
+      - ./data/schema.sql:/docker-entrypoint-initdb.d/00-schema.sql:ro
+      - ./data/data.sql:/docker-entrypoint-initdb.d/01-data.sql:ro
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
       - db_proxy_test
 
