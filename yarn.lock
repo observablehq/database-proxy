@@ -3772,10 +3772,10 @@ ms@2.1.3, ms@^2.0.0, ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-mssql@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/mssql/-/mssql-9.0.1.tgz#9a311388229e5d596bfbda616e535b9a63241d69"
-  integrity sha512-rmBEPeUgZswvcclSc4s21WJCG0xqDYBas1MSnZepzDPvtNRgkx6f/gCm52EEo2djVtIXJgRq22m7gj7floz4Ng==
+mssql@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/mssql/-/mssql-9.1.1.tgz#fcec595834db1ff6e446710794f54082fc74ef02"
+  integrity sha512-m0yTx9xzUtTvJpWJHqknUXUDPRnJXZYOOFNygnNIXn1PBkLsC/rkXQdquObd+M0ZPlBhGC00Jg28zG0wCl7VWg==
   dependencies:
     "@tediousjs/connection-string" "^0.4.1"
     commander "^9.4.0"
