@@ -53,7 +53,7 @@
     "test:ci": "docker-compose -f docker-compose.yml up --build --exit-code-from test",
     "test:db": "docker-compose -f docker-compose.yml -f docker-compose.local.yml up mssql"
   },
-  "author": "Observable",
+  "author": "Observable, Inc.",
   "license": "ISC",
   "repository": {
     "type": "git",
