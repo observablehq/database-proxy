@@ -1,0 +1,26 @@
+{
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "rules": {
+    "no-ex-assign": "off",
+    "no-var":"error",
+    "object-shorthand": ["warn", "always"],
+    "prettier/prettier": ["warn", {"bracketSpacing": false, "trailingComma": "es5"}]
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
+  "root": true
+}
