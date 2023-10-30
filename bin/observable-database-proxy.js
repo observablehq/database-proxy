@@ -17,7 +17,12 @@ argv
     name,
     start
   )
-  .command(`add <name>`, `Add a new database proxy configuration`, name, add)
+  .command(
+    `add <name> [--standalone]`,
+    `Add a new database proxy configuration`,
+    name,
+    add
+  )
   .command(
     `remove <name>`,
     `Remove an existing database proxy configuration`,
@@ -25,7 +30,7 @@ argv
     remove
   )
   .command(
-    `reset <name>`,
+    `reset <name> [--standalone]`,
     `Reset the shared secret for an existing database proxy configuration`,
     name,
     reset
@@ -39,6 +44,10 @@ argv
   .describe(
     `sslkey`,
     `Set the SSL private key location for an HTTPS database proxy`
+  )
+  .describe(
+    `standalone`,
+    `Standalone mode: create a secret for standalone clients`
   )
   .example(`$0 start localdb`, `Run an HTTP database proxy named "localdb"`)
   .example(
