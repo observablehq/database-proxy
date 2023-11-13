@@ -1,15 +1,23 @@
 version: "3.7"
 
 services:
+  lint:
+    build: .
+    command: eslint .
+
   test:
     build: .
     depends_on:
       - mssql
+      - mysql
+      - postgres
     env_file:
       - .env.test
+    environment:
+      - SNOWFLAKE_TEST_CREDENTIALS
     networks:
       - db_proxy_test
-    command: sh -c "set -o pipefail && wait-on -d 10000 -t 30000 tcp:mssql:1433 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha"
+    command: sh -c "set -o pipefail && wait-on -d 15000 -t 30000 tcp:mysql:3306 tcp:mssql:1433 tcp:postgres:5432 && node ./data/seed.mssql.js && TZ=UTC NODE_ENV=TEST node_modules/.bin/mocha --exit"
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -20,8 +28,20 @@ services:
       - MSSQL_SLEEP=7
     volumes:
       - ./data/AdventureWorks2019.bak:/var/opt/mssql/backup/test.bak
-    ports:
-      - "1433:1433"
+    networks:
+      - db_proxy_test
+
+  mysql:
+    image: mariadb:10.6.4
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+    networks:
+      - db_proxy_test
+
+  postgres:
+    image: postgres:13.8-alpine3.16
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
       - db_proxy_test
 
