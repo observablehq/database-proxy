@@ -4,7 +4,7 @@
   "version": "3.4.0",
   "type": "module",
   "engines": {
-    "node": ">=14.19.0"
+    "node": ">=16"
   },
   "exports": {
     "./postgres.js": "./lib/postgres.js",
@@ -22,7 +22,7 @@
     "JSONStream": "^1.3.5",
     "ajv": "^8.11.0",
     "micro": "^9.3.4",
-    "mssql": "^9.1.1",
+    "mssql": "^10.0.1",
     "mysql2": "^3.0.1",
     "open": "^6.3.0",
     "pg": "^8.7.1",
