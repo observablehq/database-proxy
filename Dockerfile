@@ -3,7 +3,7 @@ FROM node:18.12.1-alpine
 RUN mkdir /app
 WORKDIR /app
 
-RUN apk --no-cache add bash
+RUN apk --no-cache add bash git
 
 COPY package.json yarn.lock /app/
 RUN \
